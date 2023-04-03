@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { logout, selectAuth } from "../features/authSlice";
 
 const Dashboard = () => {
-  const { name } = useAppSelector(selectAuth);
+  const { email, access_token } = useAppSelector(selectAuth);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   
@@ -23,7 +23,7 @@ const Dashboard = () => {
             Welcome to Dashboard
           </h2>
 
-          <h4 className="py-6 text-lg md:text-2xl">Name: {name}</h4>
+          <h4 className="py-6 text-lg md:text-2xl">Name: {email}</h4>
 
           <button
             type="button"

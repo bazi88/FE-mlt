@@ -1,14 +1,16 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { AUTHENTICATION_IP } from "../data/constantData";
+
 
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://testtourapp.herokuapp.com",
+    baseUrl: AUTHENTICATION_IP,
   }),
   endpoints: (builder) => ({
     loginUser: builder.mutation({
       query: (body: { email: string; password: string }) => {
-        return { url: "/users/signin", method: "post", body };
+        return { url: "/auth/login", method: "post", body };
       },
     }),
 

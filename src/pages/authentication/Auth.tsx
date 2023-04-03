@@ -3,12 +3,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAppDispatch } from "../app/hooks";
-import { setUser } from "../features/authSlice";
+import { useAppDispatch } from "../../app/hooks";
+import { setUser } from "../../features/authSlice";
 import {
   useLoginUserMutation,
   useRegisterUserMutation,
-} from "../services/authApi";
+} from "../../services/authApi";
 
 const initialState = {
   firstName: "",
@@ -75,7 +75,7 @@ const Auth = () => {
     if (isLoginSuccess) {
       toast.success("User Login Successfully");
       dispatch(
-        setUser({ name: loginData.result.name, token: loginData.token })
+        setUser({ email: email, access_token: loginData.access_token })
       );
       navigate("/dashboard");
     }
@@ -83,7 +83,7 @@ const Auth = () => {
     if (isRegisterSuccess) {
       toast.success("User Register Successfully");
       dispatch(
-        setUser({ name: registerData.result.name, token: registerData.token })
+        setUser({ email: registerData.result.email, access_token: registerData.access_token })
       );
       navigate("/dashboard");
     }

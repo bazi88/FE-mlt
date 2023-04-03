@@ -5,27 +5,43 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAppDispatch } from "./app/hooks";
 import { setUser } from "./features/authSlice";
-import Auth from "./pages/Auth";
+import Auth from "./pages/authentication/Auth";
+import Home from "./pages/home/Home";
+import NoMatch from "./pages/NoMatch";
+import { AuthProvider } from "./hooks/useAuth";
+import { HomeLayout } from "./components/HomeLayout";
+import { ProfilePage } from "./pages/home/ProfilePage";
+import { SettingPage } from "./pages/home/SettingPage";
+import MainRoutes  from "./Routes";
+
 import Dashboard from "./pages/Dashboard";
 
 function App() {
-  const dispatch = useAppDispatch();
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
-  console.log("user", user);
+  // const dispatch = useAppDispatch();
+  // const user = JSON.parse(localStorage.getItem("user") || "{}");
+  // console.log("user", user);
 
-  useEffect(() => {
-    dispatch(setUser(user));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(setUser(user));
+  // }, []);
 
   return (
     <div className="App">
       <ToastContainer />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Navigate to="auth" replace />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
+        <MainRoutes/>
+      {/*   <AuthProvider>
+          <Routes>
+            <Route element={<HomeLayout />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Auth />} />
+            <Route/>
+            <Route path="/dashboard" element={<ProtectedLayout />}>
+              <Route path="profile" element={<ProfilePage />} />
+              <Route path="settings" element={<SettingPage />} />
+            </Route>            
+          </Routes>
+        </AuthProvider> */}
       </BrowserRouter>
     </div>
   );
